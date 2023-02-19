@@ -8,8 +8,15 @@ class User {
   }
 
   async create(body) {
-    const user = await this.userRepository.create(body);
-    return user;
+    const {password} = body;
+    const pwdEncrypt = createHmac('sha1', password).digest("hex")
+
+    const user ={
+      ...body,
+      password: pwdEncrypt
+    }
+    const users = await this.userRepository.create(user);
+    return users;
   }
 
   async findAll() {
