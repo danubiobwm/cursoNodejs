@@ -1,0 +1,24 @@
+*out
+*logs
+*actions
+*notifications
+*tools
+plugins
+user_trunk.yaml
+user.yaml
+tmp
+node_modules/
+node_modules
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
