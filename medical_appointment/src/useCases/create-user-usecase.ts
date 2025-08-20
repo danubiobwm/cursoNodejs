@@ -11,7 +11,7 @@ type UserRequest = {
 
 export class CreateUserUseCase {
   async execute(data: UserRequest) {
-    const userRepository = new UserRepository();
+    const userRepository = UserRepository.getInstance();
     const user = UserEntity.create(data);
 
 
