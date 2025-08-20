@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { CreateUserUseCase } from "./create-user-usecase";
+import { logger } from "../utils/log";
 
 export class CreateUserController {
 
