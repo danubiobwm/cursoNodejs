@@ -1,5 +1,7 @@
-import { UserEntity } from "../entities/user.entity";
-import { UserRepository } from "../repositories/user-repositories";
+import { UserEntity } from "../../entities/user.entity";
+import { UserMemoryRepository } from "../../repositories/implementations/user.memory.repository";
+
+
 
 type UserRequest = {
   name: string;
@@ -10,8 +12,10 @@ type UserRequest = {
 
 
 export class CreateUserUseCase {
+
+  constructor(private userRepository: UserMemoryRepository) {}
+
   async execute(data: UserRequest) {
-    const userRepository = UserRepository.getInstance();
     const user = UserEntity.create(data);
 
 
@@ -19,12 +23,12 @@ export class CreateUserUseCase {
       throw new Error("Username and password are required");
     }
 
-    const existingUser = await userRepository.findByUsername(data.username);
+    const existingUser = await this.userRepository.findByUsername(data.username);
     if (existingUser) {
       throw new Error("Username already exists");
     }
 
-    const userCreate = await userRepository.save(user);
+    const userCreate = await this.userRepository.save(user);
 
     return userCreate;
 
